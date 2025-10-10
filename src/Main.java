@@ -14,8 +14,13 @@ public class Main {
 
 
         produtosService.listarProdutos();
+        produtosService.consultarProduto(1);
 
         produtosService.aumentarEstoqueProduto(2,35);
         produtosService.diminuirEstoqueProduto(2,35);
+
+        produtosService.removerProduto(3);
+
+        produtosService.listarProdutos();
     }
 }
