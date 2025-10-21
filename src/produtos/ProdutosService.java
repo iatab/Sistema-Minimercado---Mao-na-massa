@@ -29,6 +29,7 @@ public class ProdutosService {
         Produto p = this.estoque.consultarProdutoPorId(id);
         System.out.println("Nome: " + p.getNome());
         System.out.println("Preco: " + p.getPreco());
+        System.out.println("Quantidade: " + p.getEstoque());
 
     }
 
@@ -41,6 +42,10 @@ public class ProdutosService {
         this.estoque.removerProduto(id);
 
 
+    }
+
+    public void listarRegistro(){
+        estoque.listarRegistros();
     }
 
 

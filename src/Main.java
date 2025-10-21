@@ -1,5 +1,6 @@
 
 import produtos.ProdutosService;
+import produtos.RegistroService;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -13,6 +14,7 @@ public class Main {
 
 
 
+
         produtosService.listarProdutos();
         produtosService.consultarProduto(1);
 
@@ -22,5 +24,9 @@ public class Main {
         produtosService.removerProduto(3);
 
         produtosService.listarProdutos();
+
+       produtosService.listarRegistro();
+
+
     }
 }

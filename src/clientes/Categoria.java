@@ -1,4 +1,6 @@
 package clientes;
 
-public class Categoria {
+public enum Categoria {
+
+    GESTOR, CLIENTE
 }
