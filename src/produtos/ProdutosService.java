@@ -4,7 +4,8 @@ public class ProdutosService {
 
     private Estoque estoque = new Estoque();
 
-
+    // fazer um metodo mostrar registro onde tenha que mandar o
+    // cliente que tenha perfil gesto, para listar os movimentos
 
     public void cadastrarProduto(Produto produto){
 
@@ -44,6 +45,11 @@ public class ProdutosService {
         System.out.println("-----------------------------------------");
 
 
+    }
+
+    public void alterarPrecoProduto(int id, int valor){
+        this.estoque.alterarPrecoProduto(id,valor);
+        System.out.println("valor alterado com sucesso");
     }
 
     public void listarProdutos(){

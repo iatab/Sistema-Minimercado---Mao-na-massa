@@ -70,12 +70,21 @@ public class Estoque {
 
     }
 
+    public void alterarPrecoProduto(int id, int valor){
+        for (Produto p : produtos) {
+            if(p.getId() == id) {
+                p.setPreco(valor);
+
+            }
+        }
+    }
+
     public void listarProdutos(){
         System.out.println("-------------------------------");
         System.out.println("LISTA DE TODOS PRODUTOS NO ESTOQUE");
     for (Produto p : produtos) {
 
-        System.out.println("Nome: " + p.getNome() + " quantidade: "+p.getEstoque());
+        System.out.println("Nome: " + p.getNome() + " quantidade: "+p.getEstoque()+ " Preço: " + p.getPreco()) ;
 
     }
         System.out.println("-------------------------------");
@@ -102,6 +111,8 @@ public class Estoque {
     public void listarRegistros(){
         registro.listarMovimentos();
     }
+
+
 
 
 
