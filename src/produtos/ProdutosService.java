@@ -3,12 +3,12 @@ package produtos;
 public class ProdutosService {
 
     private Estoque estoque = new Estoque();
-    // falta implementar um sistema de registro
 
 
-    public void criarProduto(int id, String nome, String codigoBarras, double preco, double custoMedio, int estoque){
-    Produto p = new Produto(id,nome,codigoBarras,preco,custoMedio,estoque);
-    this.estoque.adicionarProduto(p);
+
+    public void cadastrarProduto(Produto produto){
+
+    this.estoque.adicionarProduto(produto);
 
 
 
@@ -25,11 +25,24 @@ public class ProdutosService {
 
 
 
-    public void consultarProduto(int id){
+    public Produto consultarProduto(int id){
         Produto p = this.estoque.consultarProdutoPorId(id);
-        System.out.println("Nome: " + p.getNome());
-        System.out.println("Preco: " + p.getPreco());
-        System.out.println("Quantidade: " + p.getEstoque());
+        return  p;
+
+    }
+
+    public void listarProdutoPorId(int id){
+        Produto p = this.estoque.consultarProdutoPorId(id);
+        System.out.println("-----------------------------------------");
+        System.out.println("RELATÓRIO DE UM PRODUTO NO ESTOQUE");
+        System.out.println("Id: " + p.getId());
+        System.out.println("nome: " + p.getNome());
+        System.out.println("Quantidade no estoque: " + p.getEstoque());
+        System.out.println("Preço " + p.getPreco());
+        System.out.println("Custo Médio: " + p.getCustoMedio());
+        System.out.println("Codigo de Barras: " + p.getCodigoBarras());
+        System.out.println("-----------------------------------------");
+
 
     }
 

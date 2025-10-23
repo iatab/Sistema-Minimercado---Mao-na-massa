@@ -21,6 +21,7 @@ public class RegistroService implements  IRegistroService{
     }
 
     public void listarMovimentos() {
+        System.out.println("LISTA DE TODOS OS REGISTROS DO ESTOQUE ");
         for (Registro m : movimentos) {
             System.out.println(m);
         }

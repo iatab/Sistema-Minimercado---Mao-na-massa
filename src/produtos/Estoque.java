@@ -71,11 +71,14 @@ public class Estoque {
     }
 
     public void listarProdutos(){
+        System.out.println("-------------------------------");
+        System.out.println("LISTA DE TODOS PRODUTOS NO ESTOQUE");
     for (Produto p : produtos) {
-        System.out.println("-------------------------------");
+
         System.out.println("Nome: " + p.getNome() + " quantidade: "+p.getEstoque());
-        System.out.println("-------------------------------");
+
     }
+        System.out.println("-------------------------------");
 
     }
 
