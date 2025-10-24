@@ -16,8 +16,8 @@ public class Main {
         ClienteService clienteService = new ClienteService();
 
       popularProdutos(produtosService);
-      popularClientes(clienteService);
-     testarVendas(vendaService, produtosService, clienteService);
+//      popularClientes(clienteService);
+//     testarVendas(vendaService, produtosService, clienteService);
       testarProdutos(produtosService);
 
 
@@ -171,15 +171,21 @@ public class Main {
 
     public static void testarProdutos(ProdutosService produtosService){
 
+
+
+
+
         System.out.println("TESTANDO O PRODUTOSERVICE");
         //teste de produto service
+
+        // criar um listar produto por id
 
 
         produtosService.listarProdutos();
         produtosService.listarProdutoPorId(1);
 
         produtosService.aumentarEstoqueProduto(2,35);
-        produtosService.diminuirEstoqueProduto(2,35);
+        produtosService.diminuirEstoqueProduto(2,350);
 
         produtosService.removerProduto(3);
         produtosService.alterarPrecoProduto(1,20);
