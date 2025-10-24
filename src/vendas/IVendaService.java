@@ -13,10 +13,14 @@ public interface IVendaService {
 
     void adicionarItemDaVenda(int idProduto, int idVenda, int quantidade);
 
-    void removerItemDaVenda();
+
+
+    void removerItemDaVenda(int idProduto, int idVenda);
+
     void finalizarVenda();
     void listarVendas();
 
 
 
+    void aplicarDesconto(int idVenda);
 }

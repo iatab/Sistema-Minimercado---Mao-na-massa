@@ -22,13 +22,14 @@ public class Venda {
         this.valorTotal = valorTotal;
     }
 
-    public Venda(int id, Cliente cliente, double desconto, double valorTotal) {
+    public Venda(int id, Cliente cliente) {
         this.id = id;
         this.dataHora = LocalDateTime.now();
         this.cliente = cliente;
         this.itens = new ArrayList<>();
-        this.desconto = desconto;
-        this.valorTotal = valorTotal;
+        this.desconto = cliente.getCategoria().getDesconto();
+//        this.valorTotal = 0 * desconto;
+
     }
 
     public int getId() {

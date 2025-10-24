@@ -53,10 +53,49 @@ public class VendaService implements IVendaService {
 
     }
 
-    @Override
-    public void removerItemDaVenda() {
 
+    @Override
+    public void removerItemDaVenda(int idProduto, int idVenda) {
+        Venda venda = vendas.get(idVenda);
+
+        if (venda == null) {
+            System.out.println("Venda com ID " + idVenda + " não encontrada.");
+            return;
+        }
+
+        if (venda.getItens() == null || venda.getItens().isEmpty()) {
+            System.out.println("Nenhum item encontrado nessa venda.");
+            return;
+        }
+
+        ItensVenda itemParaRemover = null;
+
+        // procura o item com o id do produto
+        for (ItensVenda item : venda.getItens()) {
+            if (item.getId() == idProduto) {
+                itemParaRemover = item;
+                break;
+            }
+        }
+
+        if (itemParaRemover != null) {
+            // devolve o estoque do produto removido
+            Produto produto = produtosService.consultarProduto(idProduto);
+//            produto.setEstoque(produto.getEstoque() + itemParaRemover.getQuantidade());
+                produtosService.aumentarEstoqueProduto(idProduto,produto.getEstoque() + itemParaRemover.getQuantidade());
+            // atualiza o valor total da venda
+            double valorRemovido = itemParaRemover.getPreco() * itemParaRemover.getQuantidade();
+            venda.setValorTotal(venda.getValorTotal() - valorRemovido);
+
+            // remove o item da lista
+            venda.getItens().remove(itemParaRemover);
+
+            System.out.println("Item '" + itemParaRemover.getNome() + "' removido da venda " + idVenda);
+        } else {
+            System.out.println("Produto com ID " + idProduto + " não encontrado na venda " + idVenda);
+        }
     }
+
 
     @Override
     public void finalizarVenda() {
@@ -102,6 +141,27 @@ public class VendaService implements IVendaService {
 
         System.out.println("--------------------------------------------------");
     }
+
+    @Override
+    public void aplicarDesconto(int idVenda) {
+
+        Venda venda = vendas.get(idVenda);
+
+        if(venda.getCliente() != null){
+            venda.setDesconto(venda.getCliente().getCategoria().getDesconto());
+            double procentDesconto = venda.getCliente().getCategoria().getDesconto();
+            double valorTotal = venda.getValorTotal();
+            double valorDescontado = valorTotal * procentDesconto;
+            double valorFinal = valorTotal - valorDescontado;
+            venda.setValorTotal(valorFinal);
+        } else {
+            System.out.println("Nenhum cliente encontrado");
+        }
+
+
+
+    }
+
 
 
 
