@@ -28,14 +28,25 @@ public class Estoque {
 
     public void aumentarEstoqueProduto(int id, int valor){
 
+        if (valor <= 0) {
+            System.out.println("Erro: o valor para aumento de estoque deve ser positivo.");
+            return;
+        }
+
         for (Produto p : produtos) {
             if(p.getId() == id) {
                 int estoque = p.getEstoque();
-                p.setEstoque( estoque + valor);
-                registro.registrarEntrada(p.getId(),p.getEstoque(),"foram adicionados: " + valor + " " +p.getNome()+ " ao estoque");
-                System.out.println("-------------------------------");
-                registro.listarUltimoMovimento();
-                System.out.println("-------------------------------");
+                if(estoque + valor < 0 ) {
+                    System.out.println("Operacao ilegal o estoque nao pode ficar negativo");
+                } else {
+
+                    p.setEstoque( estoque + valor);
+                    registro.registrarEntrada(p.getId(),p.getEstoque(),"foram adicionados: " + valor + " " +p.getNome()+ " ao estoque");
+                    System.out.println("-------------------------------");
+                    registro.listarUltimoMovimento();
+                    System.out.println("-------------------------------");
+                }
+
             }
         }
 
@@ -46,11 +57,18 @@ public class Estoque {
         for (Produto p : produtos) {
             if(p.getId() == id) {
                 int estoque = p.getEstoque();
-                p.setEstoque(estoque - valor);
-                registro.registrarSaida(p.getId(),p.getEstoque(),"foram removidos: " + valor + " " +p.getNome()+ " ao estoque");
-                System.out.println("-------------------------------");
-                registro.listarUltimoMovimento();
-                System.out.println("-------------------------------");
+                if(estoque - valor < 0 ) {
+                    System.out.println("Operacao ilegal o estoque nao pode ficar negativo");
+                } else {
+
+                    p.setEstoque(estoque - valor);
+                    registro.registrarSaida(p.getId(),p.getEstoque(),"foram removidos: " + valor + " " +p.getNome()+ " ao estoque");
+                    System.out.println("-------------------------------");
+                    registro.listarUltimoMovimento();
+                    System.out.println("-------------------------------");
+                }
+
+
             }
         }
 
@@ -64,19 +82,25 @@ public class Estoque {
             if(p.getId() == id) {
                 return p;
             }
-        } return null;
+        } throw new IllegalArgumentException("Produto com ID " + id + " não encontrado.");
 
 
 
     }
 
     public void alterarPrecoProduto(int id, int valor){
-        for (Produto p : produtos) {
-            if(p.getId() == id) {
-                p.setPreco(valor);
+        Produto produto = this.consultarProdutoPorId(id) ;
+        produto.setPreco(valor);
 
-            }
-        }
+
+
+//        for (Produto p : produtos) {
+//            if(p.getId() == id) {
+//
+//
+//
+//            }
+//        }
     }
 
     public void listarProdutos(){
