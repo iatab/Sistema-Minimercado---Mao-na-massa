@@ -19,6 +19,11 @@ public class Produto {
         this.codigoBarras = codigoBarras;
         this.preco = preco;
         this.custoMedio = custoMedio;
+
+        if(estoque < 0 ) {
+
+            throw new NullPointerException("nao é possivel cadastrar um produto com estoque negativo");
+        }
         this.estoque = estoque;
     }
 
@@ -51,7 +56,12 @@ public class Produto {
     }
 
     public void setPreco(double preco) {
-        this.preco = preco;
+        if (preco < 0 ) {
+            System.out.println("Operaçao ilegal, valor do produto negativo");
+        } else {
+            this.preco = preco;
+        }
+
     }
 
     public double getCustoMedio() {
@@ -67,6 +77,12 @@ public class Produto {
     }
 
     public void setEstoque(int estoque) {
-        this.estoque = estoque;
+        if (estoque < 0 ) {
+            System.out.println("Operaçao ilegal, valor do estoque negativo");
+        } else {
+            this.estoque = estoque;
+        }
+
+
     }
 }
