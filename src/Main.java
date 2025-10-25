@@ -59,7 +59,7 @@ public class Main {
 
         System.out.println("TESTANDO INSERCAO DE PRODUTO COM DADO FALTANDO");
         try{
-            produtosService.cadastrarProduto(new Produto(4, "a", "7891234560035", 4.29, 2.80, 400));
+            produtosService.cadastrarProduto(new Produto(4, "", "7891234560035", 4.29, 2.80, 400));
 
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());
