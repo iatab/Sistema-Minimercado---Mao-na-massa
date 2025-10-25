@@ -32,6 +32,7 @@ public class ClienteService {
         }
 
         // Cabeçalho da tabela
+        System.out.println("--------------------------------------------------------------------------");
         System.out.printf("%-5s %-20s %-15s %-10s %-20s%n", "ID", "Nome", "Telefone", "Categoria", "CPF/CNPJ");
         System.out.println("--------------------------------------------------------------------------");
 
@@ -61,6 +62,31 @@ public class ClienteService {
             System.out.println("⚠️ Cliente com ID " + id + " não encontrado.");
             return null;
         }
+    }
+
+    public void listarUmClientePorId(int id) {
+        for (Cliente c : clientes) {
+            if(c.getId() == id){
+                System.out.println("--------------------------------------------------------------------------");
+                System.out.println("LISTANDO UM CLIENTE POR ID");
+                System.out.printf("%-5s %-20s %-15s %-10s %-20s%n", "ID", "Nome", "Telefone", "Categoria", "CPF/CNPJ");
+                System.out.println("--------------------------------------------------------------------------");
+
+                if (c instanceof ClientePessoaFisica) {
+                    ClientePessoaFisica pf = (ClientePessoaFisica) c;
+                    System.out.printf("%-5d %-20s %-15s %-10s %-20s%n", pf.getId(), pf.getNome(), pf.getTelefone(), pf.getCategoria(), pf.getCpf());
+                } else if (c instanceof ClientePessoaJuridica) {
+                    ClientePessoaJuridica pj = (ClientePessoaJuridica) c;
+                    System.out.printf("%-5d %-20s %-15s %-10s %-20s%n", pj.getId(), pj.getNome(), pj.getTelefone(), pj.getCategoria(), pj.getCnpj());
+                }
+                return;
+
+            }
+
+        }
+
+        System.out.println("cliente com id "+ id + " nao encontrado");
+
     }
 
 

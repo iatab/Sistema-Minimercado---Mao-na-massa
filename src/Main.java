@@ -5,6 +5,8 @@ import vendas.IVendaService;
 import vendas.Venda;
 import vendas.VendaService;
 
+import java.sql.SQLOutput;
+
 public class Main {
     public static void main(String[] args) {
 
@@ -58,6 +60,8 @@ public class Main {
 
         clienteService.adicionarCliente(new ClientePessoaJuridica(
                 4, "Comercial Silva ME", "16.267.920/0001-00", "96666-6666", Categoria.BRONZE));
+        System.out.println("--------------------------------");
+        System.out.println("TESTANDO INSERCAO DE CLIENTE COM CNPJ INVALIDO");
 
         try{
             clienteService.adicionarCliente(new ClientePessoaJuridica(
@@ -66,8 +70,13 @@ public class Main {
         } catch (IllegalArgumentException e ) {
             System.out.println(e.getMessage());
         }
+        System.out.println("--------------------------------");
 
         clienteService.listarClientes();
+        System.out.println("--------------------------------");
+        System.out.println("TESTE DE BUSCAR UM CLIENTE QUE NAO EXISTE");
+        clienteService.listarUmClientePorId(5);
+        System.out.println("--------------------------------");
     }
 
     // ============================
