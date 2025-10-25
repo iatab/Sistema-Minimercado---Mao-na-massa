@@ -48,16 +48,24 @@ public class Main {
         System.out.println("\n CADASTRANDO CLIENTES");
 
         clienteService.adicionarCliente(new ClientePessoaFisica(
-                1, "João Silva", "123.456.789-00", "99999-9999", Categoria.OURO));
+                1, "João Silva", "829.848.730-33", "99999-9999", Categoria.OURO));
 
         clienteService.adicionarCliente(new ClientePessoaFisica(
-                2, "Maria Souza", "987.654.321-00", "98888-8888", Categoria.PRATA));
+                2, "Maria Souza", "381.721.540-11", "98888-8888", Categoria.PRATA));
 
         clienteService.adicionarCliente(new ClientePessoaJuridica(
-                3, "Tech Solutions LTDA", "12.345.678/0001-90", "97777-7777", Categoria.PLATINA));
+                3, "Tech Solutions LTDA", "06.396.088/0001-99", "97777-7777", Categoria.PLATINA));
 
         clienteService.adicionarCliente(new ClientePessoaJuridica(
-                4, "Comercial Silva ME", "98.765.432/0001-10", "96666-6666", Categoria.BRONZE));
+                4, "Comercial Silva ME", "16.267.920/0001-00", "96666-6666", Categoria.BRONZE));
+
+        try{
+            clienteService.adicionarCliente(new ClientePessoaJuridica(
+                    4, "Comercial Silva ME", "16.267.920/0001-0", "96666-6666", Categoria.BRONZE));
+
+        } catch (IllegalArgumentException e ) {
+            System.out.println(e.getMessage());
+        }
 
         clienteService.listarClientes();
     }

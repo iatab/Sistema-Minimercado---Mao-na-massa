@@ -25,8 +25,26 @@ public class ClienteService {
 
 
     // - listar todos
-    public List<Cliente> listarClientes() {
-        return new ArrayList<>(clientes);
+    public void listarClientes() {
+        if (clientes.isEmpty()) {
+            System.out.println("Nenhum cliente cadastrado.");
+            return;
+        }
+
+        // Cabeçalho da tabela
+        System.out.printf("%-5s %-20s %-15s %-10s %-20s%n", "ID", "Nome", "Telefone", "Categoria", "CPF/CNPJ");
+        System.out.println("--------------------------------------------------------------------------");
+
+        // Percorre todos os clientes
+        for (Cliente c : clientes) {
+            if (c instanceof ClientePessoaFisica) {
+                ClientePessoaFisica pf = (ClientePessoaFisica) c;
+                System.out.printf("%-5d %-20s %-15s %-10s %-20s%n", pf.getId(), pf.getNome(), pf.getTelefone(), pf.getCategoria(), pf.getCpf());
+            } else if (c instanceof ClientePessoaJuridica) {
+                ClientePessoaJuridica pj = (ClientePessoaJuridica) c;
+                System.out.printf("%-5d %-20s %-15s %-10s %-20s%n", pj.getId(), pj.getNome(), pj.getTelefone(), pj.getCategoria(), pj.getCnpj());
+            }
+        }
     }
 
 

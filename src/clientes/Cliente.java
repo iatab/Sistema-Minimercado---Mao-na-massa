@@ -8,8 +8,17 @@ public abstract class Cliente {
     private Categoria categoria;
 
     public Cliente(int id, String nome, String telefone, Categoria categoria) {
-        this.id = id;
-        this.nome = nome;
+        if (id < 0 ){
+            throw new NullPointerException("nao pode criar um produto com id negativo");
+        } else
+        {
+            this.id = id;
+        }
+        if( nome.isEmpty()) {
+            throw new NullPointerException("nome nao pode estar vazio");
+        } else {
+            this.nome = nome;
+        }
         this.telefone = telefone;
         this.categoria = categoria;
     }
@@ -44,5 +53,11 @@ public abstract class Cliente {
 
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
+    }
+
+
+    @Override
+    public String toString() {
+        return String.format("%-5s %-20s %-15s %-10s", id, nome, telefone, categoria);
     }
 }
