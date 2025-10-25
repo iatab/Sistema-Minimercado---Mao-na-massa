@@ -171,7 +171,9 @@ public class Main {
         Venda v2 = new Venda(2, cliente1);
         vendaService.iniciarVenda(v2);
         vendaService.adicionarItemDaVenda(2, 2, 10);
-        vendaService.aplicarDesconto(2);
+        vendaService.aplicarDesconto(2); // tratar erro ao aplicar desconto a uma venda que nao existe
+
+
 
         // Venda com cliente PJ
         Cliente cliente3 = clienteService.buscarPorId(3);

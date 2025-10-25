@@ -162,7 +162,9 @@ public class VendaService implements IVendaService {
 
         Venda venda = vendas.get(idVenda);
 
-        if(venda.getCliente() != null){
+        if (venda == null ){
+            System.out.println("venda nao encontrada");
+        } else if(venda.getCliente() != null){
             venda.setDesconto(venda.getCliente().getCategoria().getDesconto());
             double procentDesconto = venda.getCliente().getCategoria().getDesconto();
             double valorTotal = venda.getValorTotal();
