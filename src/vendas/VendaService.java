@@ -33,19 +33,27 @@ public class VendaService implements IVendaService {
     @Override
     public void adicionarItemDaVenda(int idProduto, int idVenda, int quantidade) {
 
-        if(produtosService.consultarProduto(idProduto).getEstoque() >= quantidade) {
-            Produto produto = produtosService.consultarProduto(idProduto);
-            ItensVenda item = new ItensVenda(produto.getId(),produto.getNome(), quantidade, produto.getPreco());
-            //adiciona o item a venda
-            vendas.get(idVenda).getItens().add(item);
-            //atualiza o valor total da venda
-            vendas.get(idVenda).setValorTotal((vendas.get(idVenda).getValorTotal() + item.getPreco() * quantidade) );
-            // diminui a quantidade do estoque
-            produtosService.consultarProduto(idProduto).setEstoque(produto.getEstoque() - quantidade );
+        try{
 
-        } else {
-            System.out.println("nao ha estoque suficiente");
+            if(produtosService.consultarProduto(idProduto).getEstoque() >= quantidade) {
+                Produto produto = produtosService.consultarProduto(idProduto);
+                ItensVenda item = new ItensVenda(produto.getId(),produto.getNome(), quantidade, produto.getPreco());
+                //adiciona o item a venda
+                vendas.get(idVenda).getItens().add(item);
+                //atualiza o valor total da venda
+                vendas.get(idVenda).setValorTotal((vendas.get(idVenda).getValorTotal() + item.getPreco() * quantidade) );
+                // diminui a quantidade do estoque
+                produtosService.consultarProduto(idProduto).setEstoque(produto.getEstoque() - quantidade );
+
+            } else {
+                System.out.println("nao ha estoque suficiente");
+            }
+
+        } catch (RuntimeException e ) {
+            System.out.println(e.getMessage());
         }
+
+
 
         // eu tenho que adicionar o produto aqui e verificar se a quantidade necessária é a mesma do estoque.
 
@@ -56,44 +64,51 @@ public class VendaService implements IVendaService {
 
     @Override
     public void removerItemDaVenda(int idProduto, int idVenda) {
-        Venda venda = vendas.get(idVenda);
+        try {
 
-        if (venda == null) {
-            System.out.println("Venda com ID " + idVenda + " não encontrada.");
-            return;
-        }
+            Venda venda = vendas.get(idVenda);
 
-        if (venda.getItens() == null || venda.getItens().isEmpty()) {
-            System.out.println("Nenhum item encontrado nessa venda.");
-            return;
-        }
-
-        ItensVenda itemParaRemover = null;
-
-        // procura o item com o id do produto
-        for (ItensVenda item : venda.getItens()) {
-            if (item.getId() == idProduto) {
-                itemParaRemover = item;
-                break;
+            if (venda == null) {
+                System.out.println("Venda com ID " + idVenda + " não encontrada.");
+                return;
             }
-        }
 
-        if (itemParaRemover != null) {
-            // devolve o estoque do produto removido
-            Produto produto = produtosService.consultarProduto(idProduto);
+            if (venda.getItens() == null || venda.getItens().isEmpty()) {
+                System.out.println("Nenhum item encontrado nessa venda.");
+                return;
+            }
+
+            ItensVenda itemParaRemover = null;
+
+            // procura o item com o id do produto
+            for (ItensVenda item : venda.getItens()) {
+                if (item.getId() == idProduto) {
+                    itemParaRemover = item;
+                    break;
+                }
+            }
+
+            if (itemParaRemover != null) {
+                // devolve o estoque do produto removido
+                Produto produto = produtosService.consultarProduto(idProduto);
 //            produto.setEstoque(produto.getEstoque() + itemParaRemover.getQuantidade());
                 produtosService.aumentarEstoqueProduto(idProduto,produto.getEstoque() + itemParaRemover.getQuantidade());
-            // atualiza o valor total da venda
-            double valorRemovido = itemParaRemover.getPreco() * itemParaRemover.getQuantidade();
-            venda.setValorTotal(venda.getValorTotal() - valorRemovido);
+                // atualiza o valor total da venda
+                double valorRemovido = itemParaRemover.getPreco() * itemParaRemover.getQuantidade();
+                venda.setValorTotal(venda.getValorTotal() - valorRemovido);
 
-            // remove o item da lista
-            venda.getItens().remove(itemParaRemover);
+                // remove o item da lista
+                venda.getItens().remove(itemParaRemover);
 
-            System.out.println("Item '" + itemParaRemover.getNome() + "' removido da venda " + idVenda);
-        } else {
-            System.out.println("Produto com ID " + idProduto + " não encontrado na venda " + idVenda);
+                System.out.println("Item '" + itemParaRemover.getNome() + "' removido da venda " + idVenda);
+            } else {
+                System.out.println("Produto com ID " + idProduto + " não encontrado na venda " + idVenda);
+            }
+
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
         }
+
     }
 
 

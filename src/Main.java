@@ -35,13 +35,36 @@ public class Main {
     public static void popularProdutos(ProdutosService produtosService) {
         System.out.println("\n POPULANDO PRODUTOS NO ESTOQUE");
 
-        Produto p1 = new Produto(1, "Arroz Branco Tipo 1", "7891234560011", 8.99, 6.50, 300);
-        Produto p2 = new Produto(2, "Feijão Carioca 1kg", "7891234560028", 6.49, 4.20, 250);
-        Produto p3 = new Produto(3, "Macarrão Espaguete 500g", "7891234560035", 4.29, 2.80, 400);
+//        Produto p1 = new Produto(1, "Arroz Branco Tipo 1", "7891234560011", 8.99, 6.50, 300);
+//        Produto p2 = new Produto(2, "Feijão Carioca 1kg", "7891234560028", 6.49, 4.20, 250);
+//        Produto p3 = new Produto(3, "Macarrão Espaguete 500g", "7891234560035", 4.29, 2.80, 400);
 
-        produtosService.cadastrarProduto(p1);
-        produtosService.cadastrarProduto(p2);
-        produtosService.cadastrarProduto(p3);
+        try {
+            produtosService.cadastrarProduto(new Produto(1, "Arroz Branco Tipo 1", "7891234560011", 8.99, 6.50, 300));
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            produtosService.cadastrarProduto(new Produto(2, "Feijão Carioca 1kg", "7891234560028", 6.49, 4.20, 250));
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            produtosService.cadastrarProduto(new Produto(3, "Macarrão Espaguete 500g", "7891234560035", 4.29, 2.80, 400));
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
+
+        System.out.println("TESTANDO INSERCAO DE PRODUTO COM DADO FALTANDO");
+        try{
+            produtosService.cadastrarProduto(new Produto(4, "a", "7891234560035", 4.29, 2.80, 400));
+
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
+
 
         produtosService.listarProdutos();
     }
@@ -88,6 +111,9 @@ public class Main {
 
         produtosService.listarProdutos();
         produtosService.listarProdutoPorId(1);
+        System.out.println("TESTE DE BUCAR UM PRODUTO QUE NAO EXISTE");
+        produtosService.listarProdutoPorId(15); // tratar erro sem que o codigo quebre
+        System.out.println("--------------------");
 
         System.out.println("TESTE DE AUMENTAR E DIMINUIR ESTOQUE");
         produtosService.aumentarEstoqueProduto(2, 35);
@@ -101,8 +127,9 @@ public class Main {
         produtosService.alterarPrecoProduto(1, 20);
         System.out.println("--------------------");
 
-        System.out.println("ALTERAR PRECO DE PRODUTO INEXISTENTE");
+        System.out.println("ALTERAR PRECO DE PRODUTO INEXISTENTE OU PREÇO NEGATIVO");
         produtosService.alterarPrecoProduto(50, 20);
+        produtosService.alterarPrecoProduto(1, -20);
         System.out.println("--------------------");
 
         System.out.println("REMOVER PRODUTO 3");
@@ -131,6 +158,12 @@ public class Main {
         vendaService.adicionarItemDaVenda(2, 1, 5);
 
         vendaService.removerItemDaVenda(1, 1);
+
+        System.out.println("--------------------");
+        System.out.println("TESTANDO REMOVER ITEM VENDA COM ID DE PRODUTO E ID DE VENDA ERRADO");
+        vendaService.removerItemDaVenda(14, 1);
+        vendaService.removerItemDaVenda(1, 16);
+        System.out.println("--------------------");
 
 
         // Venda com cliente PF

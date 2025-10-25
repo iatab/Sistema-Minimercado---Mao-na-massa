@@ -33,7 +33,9 @@ public class ProdutosService {
     }
 
     public void listarProdutoPorId(int id){
-        if (this.estoque.consultarProdutoPorId(id) != null) {
+
+        try {
+
             Produto p = this.estoque.consultarProdutoPorId(id);
             System.out.println("-----------------------------------------");
             System.out.println("RELATÓRIO DE UM PRODUTO NO ESTOQUE");
@@ -45,9 +47,11 @@ public class ProdutosService {
             System.out.println("Codigo de Barras: " + p.getCodigoBarras());
             System.out.println("-----------------------------------------");
         }
-        else {
-            System.out.println("produto nao encontrado");
+        catch (IllegalArgumentException e ){
+            System.out.println(e.getMessage());
         }
+
+
 
 
 
@@ -58,7 +62,7 @@ public class ProdutosService {
     public void alterarPrecoProduto(int id, int valor){
         try{
             this.estoque.alterarPrecoProduto(id,valor);
-            System.out.println("valor alterado com sucesso");
+
 
         } catch (IllegalArgumentException e ){
             System.out.println(e.getMessage());

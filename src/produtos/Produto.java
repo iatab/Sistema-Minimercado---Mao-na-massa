@@ -82,6 +82,7 @@ public class Produto {
             System.out.println("Operaçao ilegal, valor do produto negativo");
         } else {
             this.preco = preco;
+            System.out.println("valor alterado com sucesso");
         }
 
     }
