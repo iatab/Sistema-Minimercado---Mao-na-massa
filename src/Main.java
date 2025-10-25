@@ -181,6 +181,12 @@ public class Main {
         vendaService.adicionarItemDaVenda(2, 3, 15);
         vendaService.aplicarDesconto(3);
 
+
+        System.out.println("APLICANDO DESCONTO A UMA VENDA INEXISTENTE E A UMA VENDA SEM CLIENTE");
+        vendaService.aplicarDesconto( 25);
+        vendaService.aplicarDesconto(1);
+
+
         System.out.println("\n LISTAGEM FINAL DE VENDAS:");
         vendaService.listarVendas();
     }
