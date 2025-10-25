@@ -14,10 +14,32 @@ public class Produto {
 
 
     public Produto(int id, String nome, String codigoBarras, double preco, double custoMedio, int estoque) {
-        this.id = id;
-        this.nome = nome;
-        this.codigoBarras = codigoBarras;
-        this.preco = preco;
+
+        if (id < 0 ){
+            throw new NullPointerException("nao pode criar um produto com id negativo");
+        } else
+        {
+            this.id = id;
+        }
+        if( nome.isEmpty()) {
+           throw new NullPointerException("nome nao pode estar vazio");
+        } else {
+            this.nome = nome;
+        }
+
+        if( codigoBarras.isEmpty()) {
+            throw new NullPointerException("codigo de barras nao pode estar vazio");
+        } else {
+            this.codigoBarras = codigoBarras;
+        }
+
+        if(preco < 0) {
+            throw new NullPointerException("preco negativo");
+        } else {
+            this.preco = preco;
+        }
+
+
         this.custoMedio = custoMedio;
 
         if(estoque < 0 ) {

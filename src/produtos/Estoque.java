@@ -27,6 +27,17 @@ public class Estoque {
     }
 
     public void aumentarEstoqueProduto(int id, int valor){
+        Produto produtoEncontrado = null ;
+
+        for (Produto p : produtos) {
+            if (p.getId() == id) {
+                produtoEncontrado = p;
+                break;
+            }
+        }
+        if (produtoEncontrado == null) {
+            System.out.println(" Nao é possivel aumentar o estoque de um produto que nao existe ");
+        }
 
         if (valor <= 0) {
             System.out.println("Erro: o valor para aumento de estoque deve ser positivo.");
@@ -53,6 +64,19 @@ public class Estoque {
     }
 
     public void diminuirEstoqueProduto(int id, int valor){
+
+        Produto produtoEncontrado = null ;
+
+        for (Produto p : produtos) {
+            if (p.getId() == id) {
+                produtoEncontrado = p;
+                break;
+            }
+        }
+        if (produtoEncontrado == null) {
+            System.out.println(" Nao é possivel diminuir o estoque de um produto que nao existe ");
+        }
+
 
         for (Produto p : produtos) {
             if(p.getId() == id) {

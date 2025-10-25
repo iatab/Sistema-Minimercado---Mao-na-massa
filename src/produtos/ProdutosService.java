@@ -56,8 +56,14 @@ public class ProdutosService {
     }
 
     public void alterarPrecoProduto(int id, int valor){
-        this.estoque.alterarPrecoProduto(id,valor);
-        System.out.println("valor alterado com sucesso");
+        try{
+            this.estoque.alterarPrecoProduto(id,valor);
+            System.out.println("valor alterado com sucesso");
+
+        } catch (IllegalArgumentException e ){
+            System.out.println(e.getMessage());
+        }
+
     }
 
     public void listarProdutos(){
