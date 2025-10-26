@@ -159,7 +159,7 @@ public class Main {
         try{
             vendaService.iniciarVenda(new Venda(1));
             vendaService.adicionarItemDaVenda(1, 1, 10);
-            vendaService.adicionarItemDaVenda(2, 1, -10);
+            vendaService.adicionarItemDaVenda(2, 1, 10);
 
             vendaService.removerItemDaVenda(1, 1);
         } catch (RuntimeException e ) {

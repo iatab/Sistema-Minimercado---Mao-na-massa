@@ -33,25 +33,34 @@ public class VendaService implements IVendaService {
     @Override
     public void adicionarItemDaVenda(int idProduto, int idVenda, int quantidade) {
 
-        try{
+        if (quantidade <= 0 ) {
+            System.out.println("nao é possivel adicionar uma quantidade negativa ou zerada de itens a venda ");
+        } else {
 
-            if(produtosService.consultarProduto(idProduto).getEstoque() >= quantidade) {
-                Produto produto = produtosService.consultarProduto(idProduto);
-                ItensVenda item = new ItensVenda(produto.getId(),produto.getNome(), quantidade, produto.getPreco());
-                //adiciona o item a venda
-                vendas.get(idVenda).getItens().add(item);
-                //atualiza o valor total da venda
-                vendas.get(idVenda).setValorTotal((vendas.get(idVenda).getValorTotal() + item.getPreco() * quantidade) );
-                // diminui a quantidade do estoque
-                produtosService.consultarProduto(idProduto).setEstoque(produto.getEstoque() - quantidade );
+            try{
 
-            } else {
-                System.out.println("nao ha estoque suficiente");
+                if(produtosService.consultarProduto(idProduto).getEstoque() >= quantidade) {
+                    Produto produto = produtosService.consultarProduto(idProduto);
+                    ItensVenda item = new ItensVenda(produto.getId(),produto.getNome(), quantidade, produto.getPreco());
+                    //adiciona o item a venda
+                    vendas.get(idVenda).getItens().add(item);
+                    //atualiza o valor total da venda
+                    vendas.get(idVenda).setValorTotal((vendas.get(idVenda).getValorTotal() + item.getPreco() * quantidade) );
+                    // diminui a quantidade do estoque
+                    produtosService.consultarProduto(idProduto).setEstoque(produto.getEstoque() - quantidade );
+
+                } else {
+                    System.out.println("nao ha estoque suficiente");
+                }
+
+            } catch (RuntimeException e ) {
+                System.out.println(e.getMessage());
             }
 
-        } catch (RuntimeException e ) {
-            System.out.println(e.getMessage());
+
         }
+
+
 
 
 
