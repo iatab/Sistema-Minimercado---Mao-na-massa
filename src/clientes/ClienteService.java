@@ -59,7 +59,7 @@ public class ClienteService {
         if (cliente.isPresent()) {
             return cliente.get();
         } else {
-            System.out.println("⚠️ Cliente com ID " + id + " não encontrado.");
+            System.out.println(" Cliente com ID " + id + " não encontrado.");
             return null;
         }
     }
@@ -149,7 +149,7 @@ public class ClienteService {
         Cliente cliente = buscarPorId(id);
         if (cliente != null) {
             clientes.remove(cliente);
-            System.out.println("🗑️ Cliente removido com sucesso!");
+            System.out.println("🗑 Cliente removido com sucesso!");
             return true;
         }
         System.out.println("️ Cliente com ID " + id + " não encontrado para remoção.");

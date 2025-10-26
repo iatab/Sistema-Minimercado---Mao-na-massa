@@ -156,12 +156,16 @@ public class Main {
         System.out.println("\n TESTANDO SISTEMA DE VENDAS");
 
         // Venda sem cliente
-        Venda v1 = new Venda(1);
-        vendaService.iniciarVenda(v1);
-        vendaService.adicionarItemDaVenda(1, 1, 10);
-        vendaService.adicionarItemDaVenda(2, 1, 5);
+        try{
+            vendaService.iniciarVenda(new Venda(1));
+            vendaService.adicionarItemDaVenda(1, 1, 10);
+            vendaService.adicionarItemDaVenda(2, 1, -10);
 
-        vendaService.removerItemDaVenda(1, 1);
+            vendaService.removerItemDaVenda(1, 1);
+        } catch (RuntimeException e ) {
+            System.out.println(e.getMessage());
+        }
+
 
         System.out.println("--------------------");
         System.out.println("TESTANDO REMOVER ITEM VENDA COM ID DE PRODUTO E ID DE VENDA ERRADO");
@@ -171,26 +175,48 @@ public class Main {
 
 
         // Venda com cliente PF
-        Cliente cliente1 = clienteService.buscarPorId(1);
-        Venda v2 = new Venda(2, cliente1);
-        vendaService.iniciarVenda(v2);
-        vendaService.adicionarItemDaVenda(2, 2, 10);
-        vendaService.aplicarDesconto(2); // tratar erro ao aplicar desconto a uma venda que nao existe
+
+
+        try {
+            vendaService.iniciarVenda(new Venda(2, clienteService.buscarPorId(1)));
+            vendaService.adicionarItemDaVenda(2, 2, 10);
+            vendaService.aplicarDesconto(2); // tratar erro ao aplicar desconto a uma venda que nao existe
+        } catch (RuntimeException e ) {
+            System.out.println(e.getMessage());
+        }
+
+
 
 
 
         // Venda com cliente PJ
-        Cliente cliente3 = clienteService.buscarPorId(3);
-        Venda v3 = new Venda(3, cliente3);
-        vendaService.iniciarVenda(v3);
-        vendaService.adicionarItemDaVenda(1, 3, 20);
-        vendaService.adicionarItemDaVenda(2, 3, 15);
-        vendaService.aplicarDesconto(3);
+
+        try {
+            vendaService.iniciarVenda(new Venda(3, clienteService.buscarPorId(3)));
+            vendaService.adicionarItemDaVenda(1, 3, 20);
+            vendaService.adicionarItemDaVenda(2, 3, 15);
+            vendaService.aplicarDesconto(3);
+
+        } catch (RuntimeException e ) {
+            System.out.println(e.getMessage());
+        }
+
 
 
         System.out.println("APLICANDO DESCONTO A UMA VENDA INEXISTENTE E A UMA VENDA SEM CLIENTE");
         vendaService.aplicarDesconto( 25);
         vendaService.aplicarDesconto(1);
+
+        System.out.println("--------------------");
+        System.out.println("INICIANDO UMA VENDA COM UM CLIENTE INEXISTENTE");
+        try {
+            vendaService.iniciarVenda(new Venda(6, clienteService.buscarPorId(34)));
+        } catch (RuntimeException e ) {
+            System.out.println(e.getMessage());
+        }
+        System.out.println("--------------------");
+
+
 
 
         System.out.println("\n LISTAGEM FINAL DE VENDAS:");

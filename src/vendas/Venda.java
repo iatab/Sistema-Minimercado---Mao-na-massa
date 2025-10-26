@@ -27,7 +27,12 @@ public class Venda {
         this.dataHora = LocalDateTime.now();
         this.cliente = cliente;
         this.itens = new ArrayList<>();
-        this.desconto = cliente.getCategoria().getDesconto();
+       if (cliente == null) {
+           throw new NullPointerException("nao é possivel adicionar o desconto pois nao há cliente");
+       } else  {
+           this.desconto = cliente.getCategoria().getDesconto();
+       }
+
 //        this.valorTotal = 0 * desconto;
 
     }
