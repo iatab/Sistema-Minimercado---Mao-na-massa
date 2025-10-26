@@ -86,7 +86,7 @@ public class Estoque {
                 } else {
 
                     p.setEstoque(estoque - valor);
-                    registro.registrarSaida(p.getId(),p.getEstoque(),"foram removidos: " + valor + " " +p.getNome()+ " ao estoque");
+                    registro.registrarSaida(p.getId(),p.getEstoque(),"foram removidos: " + valor + " " +p.getNome()+ " do estoque");
                     System.out.println("-------------------------------");
                     registro.listarUltimoMovimento();
                     System.out.println("-------------------------------");
