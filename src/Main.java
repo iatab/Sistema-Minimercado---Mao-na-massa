@@ -98,7 +98,7 @@ public class Main {
         clienteService.listarClientes();
         System.out.println("ATUALIZAR NOME E TELEFONE DE UM CLIENTE");
         clienteService.atualizarNomeCliente(1,"Gustavo Andrade");
-        clienteService.atualizarTelefoneCliente(1,"33333-555555");
+        clienteService.atualizarTelefoneCliente(1,"33333-55555");
         clienteService.listarClientes();
         System.out.println("--------------------------------");
         System.out.println("TESTE DE BUSCAR UM CLIENTE QUE NAO EXISTE");

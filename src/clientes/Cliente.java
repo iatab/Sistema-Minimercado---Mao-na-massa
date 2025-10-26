@@ -49,13 +49,28 @@ public abstract class Cliente {
     }
 
     public void setTelefone(String telefone) {
-        if(telefone.isEmpty()) {
-            throw new NullPointerException("telefone nao pode estar vazio");
-        }    else {
+
+
+
+            if (telefone == null || telefone.trim().isEmpty()) {
+                throw new IllegalArgumentException("Telefone inválido: não pode ser vazio.");
+            }
+
+            // Verifica se contém letras (A-Z ou a-z)
+            if (telefone.matches(".*[a-zA-Z].*")) {
+                throw new IllegalArgumentException("Telefone inválido: não pode conter letras.");
+            }
+
+            // Verifica se contém apenas caracteres permitidos
+            if (!telefone.matches("[0-9()+\\-\\s]+")) {
+                throw new IllegalArgumentException("Telefone inválido: contém caracteres não permitidos.");
+            }
+
             this.telefone = telefone;
         }
 
-    }
+
+
 
     public Categoria getCategoria() {
         return categoria;
