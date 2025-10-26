@@ -167,7 +167,7 @@ public class Main {
         }
 
 
-        System.out.println("--------------------");
+
         System.out.println("TESTANDO REMOVER ITEM VENDA COM ID DE PRODUTO E ID DE VENDA ERRADO");
         vendaService.removerItemDaVenda(14, 1);
         vendaService.removerItemDaVenda(1, 16);
@@ -179,12 +179,18 @@ public class Main {
 
         try {
             vendaService.iniciarVenda(new Venda(2, clienteService.buscarPorId(1)));
-            vendaService.adicionarItemDaVenda(2, 2, 10);
+            vendaService.adicionarItemDaVenda(2, 2, 20);
+
             vendaService.aplicarDesconto(2); // tratar erro ao aplicar desconto a uma venda que nao existe
         } catch (RuntimeException e ) {
             System.out.println(e.getMessage());
         }
 
+
+        System.out.println("--------------------");
+        System.out.println("ADICIONAR UM PRODUTO INEXISTENTE");
+        vendaService.adicionarItemDaVenda(50,2,50);
+        System.out.println("--------------------");
 
 
 

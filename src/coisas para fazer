@@ -1,0 +1,73 @@
+Produto
+
+    Cadastrar
+
+        Dados incompletos (realizado verificação no construtor) feito
+
+        Dados em tipo inválido (a própria ide bloqueia a execuçao) feito
+
+        Estoque negativo (feito)
+
+    Consultar
+
+        Produto Inexistente (feito)
+
+    Editar
+
+        Dados incompletos
+
+        Dados em tipo inválido (perguntar prof)
+
+        Estoque negativo // feito
+
+    Listar
+
+        Listou todos? ( sim)
+
+    Alterar Estoque
+
+        Estoque negativo (sim)
+
+
+
+Cliente
+
+    Cadastrar
+
+        Dados incompletos // feito (alguns dados incomoletos)
+
+        Dados em tipo inválido //feito (verificar cpf e cnpj)
+
+    Consultar
+
+        Cliente Inexistente // feito
+
+    Editar
+
+        Dados incompletos // feito
+
+        Dados em tipo inválido // feito
+
+    Listar
+
+        Listou todos? // feito
+
+
+
+Vendas
+
+    Incluir
+
+        Erros
+
+            Quantidade superior ao estoque // feito
+
+            Quantidade zerada ou negativa // feito
+
+            Estoque atualizado // feito
+
+        Mensagem
+
+            Cliente inexistente // feito
+
+            Produto inexistente // feito
