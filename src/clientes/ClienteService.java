@@ -91,17 +91,57 @@ public class ClienteService {
 
 
     // UPDATE
-    public boolean atualizarCliente(int id, String novoNome, String novoTelefone, Categoria novaCategoria) {
-        Cliente cliente = buscarPorId(id);
-        if (cliente != null) {
-            cliente.setNome(novoNome);
-            cliente.setTelefone(novoTelefone);
-            cliente.setCategoria(novaCategoria);
-            System.out.println("🔁 Cliente atualizado com sucesso!");
-            return true;
+    public void atualizarTelefoneCliente(int id,  String novoTelefone) {
+        boolean encontrado = false;
+        for( Cliente cliente : clientes) {
+            if(  cliente.getId() == id) {
+                try {
+                    cliente.setTelefone(novoTelefone);
+                    System.out.println("telefone do cliente id: " + cliente.getId() + " alterado com sucesso");
+
+                } catch (RuntimeException e ) {
+                    System.out.println(e.getMessage());
+                }
+                encontrado = true;
+
+
+                break;
+            }
+
         }
-        return false;
+        if(!encontrado) {
+            System.out.println("cliente nao encontrado");
+        }
+
     }
+    public  void atualizarNomeCliente (int id, String nome) {
+    boolean encontrado = false;
+        for( Cliente cliente : clientes) {
+            if(  cliente.getId() == id) {
+                    try {
+                        cliente.setNome(nome);
+                        System.out.println("nome do cliente id: " + cliente.getId() + " alterado com sucesso");
+
+                    } catch (RuntimeException e ) {
+                        System.out.println(e.getMessage());
+                    }
+                encontrado = true;
+
+
+                break;
+            }
+
+            }
+        if(!encontrado) {
+            System.out.println("cliente nao encontrado");
+        }
+
+
+
+        }
+
+
+
 
 
     // DELETE
@@ -112,7 +152,7 @@ public class ClienteService {
             System.out.println("🗑️ Cliente removido com sucesso!");
             return true;
         }
-        System.out.println("⚠️ Cliente com ID " + id + " não encontrado para remoção.");
+        System.out.println("️ Cliente com ID " + id + " não encontrado para remoção.");
         return false;
     }
 }

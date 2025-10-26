@@ -36,7 +36,12 @@ public abstract class Cliente {
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        if(nome.isEmpty()) {
+            throw new NullPointerException("nome nao pode estar vazio");
+        }    else {
+            this.nome = nome;
+        }
+
     }
 
     public String getTelefone() {
@@ -44,7 +49,12 @@ public abstract class Cliente {
     }
 
     public void setTelefone(String telefone) {
-        this.telefone = telefone;
+        if(telefone.isEmpty()) {
+            throw new NullPointerException("telefone nao pode estar vazio");
+        }    else {
+            this.telefone = telefone;
+        }
+
     }
 
     public Categoria getCategoria() {

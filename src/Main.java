@@ -96,6 +96,10 @@ public class Main {
         System.out.println("--------------------------------");
 
         clienteService.listarClientes();
+        System.out.println("ATUALIZAR NOME E TELEFONE DE UM CLIENTE");
+        clienteService.atualizarNomeCliente(1,"Gustavo Andrade");
+        clienteService.atualizarTelefoneCliente(1,"33333-555555");
+        clienteService.listarClientes();
         System.out.println("--------------------------------");
         System.out.println("TESTE DE BUSCAR UM CLIENTE QUE NAO EXISTE");
         clienteService.listarUmClientePorId(5);
@@ -111,7 +115,7 @@ public class Main {
 
         produtosService.listarProdutos();
         produtosService.listarProdutoPorId(1);
-        System.out.println("TESTE DE BUCAR UM PRODUTO QUE NAO EXISTE");
+        System.out.println("TESTE DE BUSCAR UM PRODUTO QUE NAO EXISTE");
         produtosService.listarProdutoPorId(15); // tratar erro sem que o codigo quebre
         System.out.println("--------------------");
 
