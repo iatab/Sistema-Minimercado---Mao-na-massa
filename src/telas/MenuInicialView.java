@@ -31,8 +31,8 @@ public class MenuInicialView extends JFrame {
 //        criarBotao("Cadastrar", new BotaoCadastrarHandler());
 
         criarBotao("Cadastrar Produto", new BotaoCadastrarProdutoHandler(produtosService));
-        criarBotao("Alterar Preco", new BotaoAlterarPrecoHandler(produtosService));
-        criarBotao("Listar Produtos", new BotaoListarProdutosHandler(produtosService));
+//
+        criarBotao("Visualizar / Editar Produtos", new BotaoListarProdutosHandler(produtosService));
 
         criarBotao("Sair", new BotaoSairHandler());
 
@@ -86,18 +86,9 @@ public class MenuInicialView extends JFrame {
         }
     }
 
-    private static class BotaoAlterarPrecoHandler implements  ActionListener{
 
-        private ProdutosService produtosService;
-        public BotaoAlterarPrecoHandler(ProdutosService produtosService) {
-            this.produtosService = produtosService;
-        }
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            new AlterarPrecoView(produtosService);
 
-        }
-    }
+
 
     private static class BotaoSairHandler implements  ActionListener{
 

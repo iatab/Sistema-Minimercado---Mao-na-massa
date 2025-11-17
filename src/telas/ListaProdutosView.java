@@ -1,7 +1,5 @@
 package telas;
 
-
-
 import produtos.Produto;
 import produtos.ProdutosService;
 
@@ -25,22 +23,11 @@ public class ListaProdutosView extends JFrame {
         setTitle("Lista de Produtos");
         setLayout(new BorderLayout());
 
-        // Painel principal
         painel = new JPanel(new BorderLayout());
         add(painel, BorderLayout.CENTER);
 
-        // Criar tabela
         criarTabela();
-
-        // Botão Voltar
-        JButton btnVoltar = new JButton("Voltar");
-        btnVoltar.setPreferredSize(new Dimension(100, 40));
-        btnVoltar.addActionListener(new BotaoVoltarHandler());
-
-        JPanel painelBotao = new JPanel();
-        painelBotao.add(btnVoltar);
-
-        add(painelBotao, BorderLayout.SOUTH);
+        criarBotoes();
 
         setSize(700, 500);
         setVisible(true);
@@ -50,34 +37,63 @@ public class ListaProdutosView extends JFrame {
     private void criarTabela() {
 
         String[] colunas = {"ID", "Nome", "Código de Barras", "Preço", "Estoque"};
+        DefaultTableModel modelo = new DefaultTableModel(colunas, 0){
 
-        DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;  // Nenhuma célula é editável
+        }};
 
         List<Produto> lista = produtosService.listarTodosProdutos();
 
         for (Produto p : lista) {
-            Object[] linha = {
+            modelo.addRow(new Object[]{
                     p.getId(),
                     p.getNome(),
                     p.getCodigoBarras(),
                     p.getPreco(),
                     p.getEstoque()
-            };
-            modelo.addRow(linha);
+            });
         }
 
         tabela = new JTable(modelo);
-        tabela.setEnabled(false); // tabela só para visualização
+        tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         JScrollPane scroll = new JScrollPane(tabela);
         painel.add(scroll, BorderLayout.CENTER);
     }
 
-    private class BotaoVoltarHandler implements ActionListener {
+    private void criarBotoes() {
+        JPanel painelBotoes = new JPanel();
+
+        JButton btnEditar = new JButton("Visualizar / Alterar Preço");
+        JButton btnVoltar = new JButton("Voltar");
+
+        btnEditar.addActionListener(new BotaoEditarHandler());
+        btnVoltar.addActionListener(e -> dispose());
+
+        painelBotoes.add(btnEditar);
+        painelBotoes.add(btnVoltar);
+
+        add(painelBotoes, BorderLayout.SOUTH);
+    }
+
+    private class BotaoEditarHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            setVisible(false);
-            dispose();
+
+            int linha = tabela.getSelectedRow();
+
+            if (linha == -1) {
+                JOptionPane.showMessageDialog(null, "Selecione um produto!");
+                return;
+            }
+
+            int id = (int) tabela.getValueAt(linha, 0);
+
+            Produto p = produtosService.consultarProduto(id);
+
+            new EditarProdutoView(produtosService, p);
         }
     }
 }

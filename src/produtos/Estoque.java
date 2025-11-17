@@ -109,7 +109,22 @@ public class Estoque {
 
     }
 
-    public void alterarPrecoProduto(int id, int valor) {
+
+    public int gerarNovoId() {
+        int maiorId = -1;
+
+        for (Produto p : produtos) {
+            if (p.getId() > maiorId) {
+                maiorId = p.getId();
+            }
+        }
+
+        return maiorId + 1; // primeiro id será 0
+    }
+
+
+
+    public void alterarPrecoProduto(int id, double valor) {
         Produto produto = this.consultarProdutoPorId(id);
         produto.setPreco(valor);
 

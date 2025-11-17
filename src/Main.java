@@ -18,18 +18,18 @@ public class Main {
 
             new MenuInicialView(produtosService,vendaService,clienteService);
 
-        System.out.println("===== INICIANDO SISTEMA DE TESTES =====");
-
+//        System.out.println("===== INICIANDO SISTEMA DE TESTES =====");
+//
         // Popular dados iniciais
         popularProdutos(produtosService);
-        popularClientes(clienteService);
-
-        // Testes separados
-        testarProdutos(produtosService);
-        testarVendas(vendaService, produtosService, clienteService);
-
-        System.out.println("===== FIM DOS TESTES =====");
-    }
+//        popularClientes(clienteService);
+//
+//        // Testes separados
+//        testarProdutos(produtosService);
+//        testarVendas(vendaService, produtosService, clienteService);
+//
+//        System.out.println("===== FIM DOS TESTES =====");
+      }
 
     // ============================
     //  MÉTODOS DE POPULAÇÃO

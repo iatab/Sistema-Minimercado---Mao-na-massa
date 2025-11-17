@@ -28,7 +28,7 @@ public class AlterarPrecoView extends JFrame {
         this.produtosService = produtosService;
 
         setTitle("Editar Preço do Produto");
-        setSize(400, 300);
+        setSize(500, 600);
         setLayout(new GridLayout(5, 2, 10, 10));
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -107,7 +107,7 @@ public class AlterarPrecoView extends JFrame {
             public void actionPerformed(ActionEvent e) {
 
                 try {
-                    int novoPreco = Integer.parseInt(campoPreco.getText());
+                    double novoPreco = Double.parseDouble(campoPreco.getText());
 
                     produtoCarregado.setPreco(novoPreco);
                     produtosService.alterarPrecoProduto(produtoCarregado.getId(),novoPreco);

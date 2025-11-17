@@ -34,6 +34,11 @@ public class ProdutosService {
 
     }
 
+    public int gerarNovoID(){
+       return this.estoque.gerarNovoId();
+    }
+
+
     public void listarProdutoPorId(int id){
 
         try {
@@ -61,7 +66,7 @@ public class ProdutosService {
 
     }
 
-    public void alterarPrecoProduto(int id, int valor){
+    public void alterarPrecoProduto(int id, double valor){
         try{
             this.estoque.alterarPrecoProduto(id,valor);
 
