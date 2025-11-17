@@ -1,5 +1,7 @@
 package produtos;
 
+import java.util.List;
+
 public class ProdutosService {
 
     private Estoque estoque = new Estoque();
@@ -86,5 +88,9 @@ public class ProdutosService {
     }
 
 
+public List<Produto> listarTodosProdutos(){
+
+        return this.estoque.listarTodos();
+}
 
 }

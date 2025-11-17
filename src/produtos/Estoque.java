@@ -1,6 +1,7 @@
 package produtos;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Estoque {
 
@@ -17,17 +18,14 @@ public class Estoque {
     }
 
 
-
-
-
-    public void adicionarProduto(Produto p){
+    public void adicionarProduto(Produto p) {
         produtos.add(p);
         System.out.println("produto adicionado!");
-        registro.registrarEntrada(p.getId(),p.getEstoque(),"foram adicionados: "+ p.getEstoque() + " " + p.getNome());
+        registro.registrarEntrada(p.getId(), p.getEstoque(), "foram adicionados: " + p.getEstoque() + " " + p.getNome());
     }
 
-    public void aumentarEstoqueProduto(int id, int valor){
-        Produto produtoEncontrado = null ;
+    public void aumentarEstoqueProduto(int id, int valor) {
+        Produto produtoEncontrado = null;
 
         for (Produto p : produtos) {
             if (p.getId() == id) {
@@ -45,14 +43,14 @@ public class Estoque {
         }
 
         for (Produto p : produtos) {
-            if(p.getId() == id) {
+            if (p.getId() == id) {
                 int estoque = p.getEstoque();
-                if(estoque + valor < 0 ) {
+                if (estoque + valor < 0) {
                     System.out.println("Operacao ilegal o estoque nao pode ficar negativo");
                 } else {
 
-                    p.setEstoque( estoque + valor);
-                    registro.registrarEntrada(p.getId(),p.getEstoque(),"foram adicionados: " + valor + " " +p.getNome()+ " ao estoque");
+                    p.setEstoque(estoque + valor);
+                    registro.registrarEntrada(p.getId(), p.getEstoque(), "foram adicionados: " + valor + " " + p.getNome() + " ao estoque");
                     System.out.println("-------------------------------");
                     registro.listarUltimoMovimento();
                     System.out.println("-------------------------------");
@@ -63,9 +61,9 @@ public class Estoque {
 
     }
 
-    public void diminuirEstoqueProduto(int id, int valor){
+    public void diminuirEstoqueProduto(int id, int valor) {
 
-        Produto produtoEncontrado = null ;
+        Produto produtoEncontrado = null;
 
         for (Produto p : produtos) {
             if (p.getId() == id) {
@@ -79,14 +77,14 @@ public class Estoque {
 
 
         for (Produto p : produtos) {
-            if(p.getId() == id) {
+            if (p.getId() == id) {
                 int estoque = p.getEstoque();
-                if(estoque - valor < 0 ) {
+                if (estoque - valor < 0) {
                     System.out.println("Operacao ilegal o estoque nao pode ficar negativo");
                 } else {
 
                     p.setEstoque(estoque - valor);
-                    registro.registrarSaida(p.getId(),p.getEstoque(),"foram removidos: " + valor + " " +p.getNome()+ " do estoque");
+                    registro.registrarSaida(p.getId(), p.getEstoque(), "foram removidos: " + valor + " " + p.getNome() + " do estoque");
                     System.out.println("-------------------------------");
                     registro.listarUltimoMovimento();
                     System.out.println("-------------------------------");
@@ -100,22 +98,20 @@ public class Estoque {
     }
 
 
-
-    public Produto consultarProdutoPorId(int id){
+    public Produto consultarProdutoPorId(int id) {
         for (Produto p : produtos) {
-            if(p.getId() == id) {
+            if (p.getId() == id) {
                 return p;
             }
-        } throw new IllegalArgumentException("Produto com ID " + id + " não encontrado.");
-
+        }
+        throw new IllegalArgumentException("Produto com ID " + id + " não encontrado.");
 
 
     }
 
-    public void alterarPrecoProduto(int id, int valor){
-        Produto produto = this.consultarProdutoPorId(id) ;
+    public void alterarPrecoProduto(int id, int valor) {
+        Produto produto = this.consultarProdutoPorId(id);
         produto.setPreco(valor);
-
 
 
 //        for (Produto p : produtos) {
@@ -127,14 +123,15 @@ public class Estoque {
 //        }
     }
 
-    public void listarProdutos(){
+
+    public void listarProdutos() {
         System.out.println("-------------------------------");
         System.out.println("LISTA DE TODOS PRODUTOS NO ESTOQUE");
-    for (Produto p : produtos) {
+        for (Produto p : produtos) {
 
-        System.out.println("Nome: " + p.getNome() + " quantidade: "+p.getEstoque()+ " Preço: " + p.getPreco()) ;
+            System.out.println("Nome: " + p.getNome() + " quantidade: " + p.getEstoque() + " Preço: " + p.getPreco());
 
-    }
+        }
         System.out.println("-------------------------------");
 
     }
@@ -142,7 +139,7 @@ public class Estoque {
     public void removerProduto(int id) {
         for (int i = 0; i < produtos.size(); i++) {
             if (produtos.get(i).getId() == id) {
-                registro.registrarBaixa(id,produtos.get(i).getEstoque(),produtos.get(i).getNome()+" removido com sucesso");
+                registro.registrarBaixa(id, produtos.get(i).getEstoque(), produtos.get(i).getNome() + " removido com sucesso");
                 System.out.println("-------------------------------");
                 registro.listarUltimoMovimento();
                 System.out.println("-------------------------------");
@@ -156,12 +153,14 @@ public class Estoque {
         System.out.println("-------------------------------");
     }
 
-    public void listarRegistros(){
+    public void listarRegistros() {
         registro.listarMovimentos();
     }
 
 
+    public List<Produto> listarTodos() {
+        return new ArrayList<>(produtos);
 
 
-
+    }
 }

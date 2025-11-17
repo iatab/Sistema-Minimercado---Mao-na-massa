@@ -1,6 +1,7 @@
 import clientes.*;
 import produtos.Produto;
 import produtos.ProdutosService;
+import telas.MenuInicialView;
 import vendas.IVendaService;
 import vendas.Venda;
 import vendas.VendaService;
@@ -14,6 +15,8 @@ public class Main {
         ProdutosService produtosService = new ProdutosService();
         IVendaService vendaService = new VendaService(produtosService);
         ClienteService clienteService = new ClienteService();
+
+            new MenuInicialView(produtosService,vendaService,clienteService);
 
         System.out.println("===== INICIANDO SISTEMA DE TESTES =====");
 
