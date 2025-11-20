@@ -102,7 +102,7 @@ public class VendaService implements IVendaService {
                 Produto produto = produtosService.consultarProduto(idProduto);
 //            produto.setEstoque(produto.getEstoque() + itemParaRemover.getQuantidade());
 //                produtosService.aumentarEstoqueProduto(idProduto,produto.getEstoque() + itemParaRemover.getQuantidade());
-                produtosService.aumentarEstoqueProduto(idProduto, itemParaRemover.getQuantidade());
+//                produtosService.aumentarEstoqueProduto(idProduto, itemParaRemover.getQuantidade());
 
                 // atualiza o valor total da venda
                 double valorRemovido = itemParaRemover.getPreco() * itemParaRemover.getQuantidade();

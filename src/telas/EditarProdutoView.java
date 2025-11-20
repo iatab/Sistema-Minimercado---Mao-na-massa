@@ -11,12 +11,14 @@ public class EditarProdutoView extends JFrame {
 
     private ProdutosService produtosService;
     private Produto produto;
+    private ListaProdutosView listaView;
 
     private JTextField tfPreco;
 
-    public EditarProdutoView(ProdutosService produtosService, Produto produto) {
+    public EditarProdutoView(ProdutosService produtosService, Produto produto,  ListaProdutosView listaView) {
         this.produtosService = produtosService;
         this.produto = produto;
+        this.listaView = listaView;
 
         setTitle("Detalhes do Produto");
         setLayout(new FlowLayout());
@@ -57,13 +59,22 @@ public class EditarProdutoView extends JFrame {
     private void salvarPreco() {
         try {
             double novoPreco = Double.parseDouble(tfPreco.getText());
-            produto.setPreco(novoPreco);
-            JOptionPane.showMessageDialog(null, "Preço atualizado com sucesso!");
+
+            produtosService.alterarPrecoProduto(produto.getId(), novoPreco);
+
+            JOptionPane.showMessageDialog(null, "Preço atualizado!");
+
+            if (listaView != null) {
+                listaView.atualizarTabela();
+            }
+
             dispose();
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Preço inválido!");
         }
     }
+
 
     private void excluirProduto() {
         int op = JOptionPane.showConfirmDialog(null,
@@ -72,8 +83,11 @@ public class EditarProdutoView extends JFrame {
                 JOptionPane.YES_NO_OPTION);
 
         if (op == JOptionPane.YES_OPTION) {
-            produtosService.removerProduto(produto.getId());
+            produtosService.excluirProduto(produto.getId());
             JOptionPane.showMessageDialog(null, "Produto removido!");
+            if (listaView != null) {
+                listaView.atualizarTabela();
+            }
             dispose();
         }
     }

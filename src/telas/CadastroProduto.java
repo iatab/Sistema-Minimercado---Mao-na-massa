@@ -72,8 +72,6 @@ public class CadastroProduto extends JFrame {
 
     private void criarItem() {
 
-        // === VALIDAÇÕES ===
-
         String nome = tfNome.getText().trim();
         String codigo = tfCodigoBarras.getText().trim();
         String precoTxt = tfPreco.getText().trim();
@@ -82,6 +80,18 @@ public class CadastroProduto extends JFrame {
         // --- Campos vazios ---
         if (nome.isEmpty() || codigo.isEmpty() || precoTxt.isEmpty() || estoqueTxt.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
+            return;
+        }
+
+        // --- Nome repetido ---
+        if (produtosService.nomeExiste(nome)) {
+            JOptionPane.showMessageDialog(null, "Já existe um produto com esse nome!");
+            return;
+        }
+
+        // --- Código de barras repetido ---
+        if (produtosService.codigoExiste(codigo)) {
+            JOptionPane.showMessageDialog(null, "Já existe um produto com esse código de barras!");
             return;
         }
 
@@ -95,7 +105,6 @@ public class CadastroProduto extends JFrame {
         int estoque;
 
         try {
-            // --- Preço só número ---
             preco = Double.parseDouble(precoTxt.replace(",", "."));
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Digite um preço válido (somente números)!");
@@ -103,17 +112,14 @@ public class CadastroProduto extends JFrame {
         }
 
         try {
-            // --- Estoque só número inteiro ---
             estoque = Integer.parseInt(estoqueTxt);
         } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(null, "Digite um valor de estoque válido (apenas números inteiros)!");
+            JOptionPane.showMessageDialog(null, "Digite um valor de estoque válido (apenas números)!");
             return;
         }
 
         // === CRIAR PRODUTO ===
-
         Produto produto = new Produto(
-                gerarID(),
                 nome,
                 codigo,
                 preco,
@@ -126,9 +132,8 @@ public class CadastroProduto extends JFrame {
         JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
     }
 
-    private int gerarID() {
-        return produtosService.gerarNovoID();
-    }
+
+
 
     private class BotaoSalvarHandler implements ActionListener {
         @Override

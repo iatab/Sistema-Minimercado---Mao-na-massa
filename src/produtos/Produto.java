@@ -49,6 +49,34 @@ public class Produto {
         this.estoque = estoque;
     }
 
+
+    public Produto(String nome, String codigoBarras, double preco, double custoMedio, int estoque) {
+
+        if (nome == null || nome.isEmpty()) {
+            throw new IllegalArgumentException("nome nao pode estar vazio");
+        }
+        if (codigoBarras == null || codigoBarras.isEmpty()) {
+            throw new IllegalArgumentException("codigo de barras nao pode estar vazio");
+        }
+        if (preco < 0) {
+            throw new IllegalArgumentException("preco negativo");
+        }
+        if (estoque < 0) {
+            throw new IllegalArgumentException("estoque negativo");
+        }
+
+        // id fica SEM valor (0) até o BD retornar
+        this.nome = nome;
+        this.codigoBarras = codigoBarras;
+        this.preco = preco;
+        this.custoMedio = custoMedio;
+        this.estoque = estoque;
+    }
+
+
+
+
+
     public int getId() {
         return id;
     }

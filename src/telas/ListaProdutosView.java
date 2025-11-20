@@ -34,6 +34,24 @@ public class ListaProdutosView extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
+
+    public void atualizarTabela() {
+
+        DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
+        modelo.setRowCount(0); // limpa a tabela
+
+        for (Produto p : produtosService.listarTodosProdutos()) {
+            modelo.addRow(new Object[]{
+                    p.getId(),
+                    p.getNome(),
+                    p.getCodigoBarras(),
+                    p.getPreco(),
+                    p.getEstoque()
+            });
+        }
+    }
+
+
     private void criarTabela() {
 
         String[] colunas = {"ID", "Nome", "Código de Barras", "Preço", "Estoque"};
@@ -93,7 +111,8 @@ public class ListaProdutosView extends JFrame {
 
             Produto p = produtosService.consultarProduto(id);
 
-            new EditarProdutoView(produtosService, p);
+            new EditarProdutoView(produtosService, p, ListaProdutosView.this);
+            ;
         }
     }
 }
