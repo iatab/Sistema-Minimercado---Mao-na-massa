@@ -36,6 +36,11 @@ public class MenuInicialView extends JFrame {
 
         criarBotao("Sair", new BotaoSairHandler());
 
+        criarBotao("Relatório: Estoque", new BotaoRelatorioEstoqueHandler(produtosService));
+        criarBotao("Relatório: Catálogo", new BotaoRelatorioCatalogoHandler(produtosService));
+
+
+
         setSize(new Dimension(500, 500));
         setPreferredSize(new Dimension(500, 700));
         setVisible(true);
@@ -85,6 +90,34 @@ public class MenuInicialView extends JFrame {
 
         }
     }
+
+    private static class BotaoRelatorioEstoqueHandler implements ActionListener {
+        private ProdutosService produtosService;
+
+        public BotaoRelatorioEstoqueHandler(ProdutosService ps) {
+            this.produtosService = ps;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            new RelatorioEstoqueView(produtosService);
+        }
+    }
+
+    private static class BotaoRelatorioCatalogoHandler implements ActionListener {
+        private ProdutosService produtosService;
+
+        public BotaoRelatorioCatalogoHandler(ProdutosService ps) {
+            this.produtosService = ps;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            new RelatorioCatalogoView(produtosService);
+        }
+    }
+
+
 
 
 
