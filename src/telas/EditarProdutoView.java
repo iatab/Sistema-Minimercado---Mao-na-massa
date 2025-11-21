@@ -28,8 +28,9 @@ public class EditarProdutoView extends JFrame {
         addLabel("Código de Barras: " + produto.getCodigoBarras());
         addLabel("Estoque: " + produto.getEstoque());
 
-        addLabel("Preço atual:");
-        tfPreco = new JTextField(String.valueOf(produto.getPreco()));
+        addLabel("Preço atual: "  + produto.getPreco());
+        addLabel("Novo Preço");
+        tfPreco = new JTextField();
         tfPreco.setPreferredSize(new Dimension(200, 30));
         add(tfPreco);
 
@@ -58,7 +59,12 @@ public class EditarProdutoView extends JFrame {
 
     private void salvarPreco() {
         try {
-            double novoPreco = Double.parseDouble(tfPreco.getText());
+
+            String precoTxt = tfPreco.getText().replace(",", ".");
+
+            double novoPreco = Double.parseDouble(precoTxt);
+
+
 
             produtosService.alterarPrecoProduto(produto.getId(), novoPreco);
 
