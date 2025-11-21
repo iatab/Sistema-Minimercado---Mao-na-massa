@@ -34,10 +34,12 @@ public class MenuInicialView extends JFrame {
 //
         criarBotao("Visualizar / Editar Produtos", new BotaoListarProdutosHandler(produtosService));
 
-        criarBotao("Sair", new BotaoSairHandler());
-
         criarBotao("Relatório: Estoque", new BotaoRelatorioEstoqueHandler(produtosService));
         criarBotao("Relatório: Catálogo", new BotaoRelatorioCatalogoHandler(produtosService));
+
+
+        criarBotao("Sair", new BotaoSairHandler());
+
 
 
 
