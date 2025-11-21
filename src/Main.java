@@ -17,6 +17,39 @@ public class Main {
         new MenuInicialView(produtosService, vendaService, clienteService);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //        System.out.println("===== INICIANDO SISTEMA DE TESTES =====");
 //
         // Popular dados iniciais
