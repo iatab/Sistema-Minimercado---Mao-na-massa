@@ -6,7 +6,8 @@ import java.sql.DriverManager;
 
 public class ConnectionFactory {
 
-    private final static String URL = "jdbc:mysql://localhost:3306/prova?useSSL=false&serverTimezone=UTC";
+    private final static String URL = "jdbc:mysql://localhost:3306/prova?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
+
     private final static String USER = "root";
     private final static String PASS = "senai";
 
