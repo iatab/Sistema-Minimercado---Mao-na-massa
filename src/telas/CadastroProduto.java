@@ -77,48 +77,59 @@ public class CadastroProduto extends JFrame {
         String precoTxt = tfPreco.getText().trim();
         String estoqueTxt = tfEstoque.getText().trim();
 
-        // --- Campos vazios ---
+        // === VALIDAÇÕES ===
+
+        // Campos vazios
         if (nome.isEmpty() || codigo.isEmpty() || precoTxt.isEmpty() || estoqueTxt.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
             return;
         }
 
-        // --- Nome repetido ---
+        // Nome repetido
         if (produtosService.nomeExiste(nome)) {
             JOptionPane.showMessageDialog(null, "Já existe um produto com esse nome!");
             return;
         }
 
-        // --- Código de barras repetido ---
+        // Código repetido
         if (produtosService.codigoExiste(codigo)) {
             JOptionPane.showMessageDialog(null, "Já existe um produto com esse código de barras!");
             return;
         }
 
-        // --- Código de barras só números ---
+        // Somente números
         if (!codigo.matches("\\d+")) {
             JOptionPane.showMessageDialog(null, "O código de barras deve conter apenas números!");
             return;
         }
 
-        double preco;
-        int estoque;
+        // Tamanho válido: 13 ou 14 dígitos
+        if (!(codigo.length() == 13 )) {
+            JOptionPane.showMessageDialog(null,
+                    "Código de barras inválido!\n" +
+                            "Use 13 dígitos.");
+            return;
+        }
 
+        // Preço válido
+        double preco;
         try {
             preco = Double.parseDouble(precoTxt.replace(",", "."));
         } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(null, "Digite um preço válido (somente números)!");
+            JOptionPane.showMessageDialog(null, "Digite um preço válido!");
             return;
         }
 
+        // Estoque válido
+        int estoque;
         try {
             estoque = Integer.parseInt(estoqueTxt);
         } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(null, "Digite um valor de estoque válido (apenas números)!");
+            JOptionPane.showMessageDialog(null, "Digite um valor de estoque válido!");
             return;
         }
 
-        // === CRIAR PRODUTO ===
+        // Criar produto
         Produto produto = new Produto(
                 nome,
                 codigo,
@@ -131,9 +142,6 @@ public class CadastroProduto extends JFrame {
 
         JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
     }
-
-
-
 
     private class BotaoSalvarHandler implements ActionListener {
         @Override
